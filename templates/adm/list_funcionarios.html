@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Lista de Funcionários</h1>
+    <a href="{{ url_for('criar_funcionario') }}">Adicionar Novo Funcionário</a>
     <ul>
         {% for funcionario in funcionarios %}
             <li>
@@ -32,7 +33,6 @@
             return confirm("Tem certeza de que deseja excluir este funcionário?");
         }
     </script>
-
-    <a href="{{ url_for('criar_funcionario') }}">Adicionar Novo Funcionário</a>
+    <a href="{{ url_for('admin_menu') }}">Voltar ao Menu Admin</a>
 </body>
 </html>

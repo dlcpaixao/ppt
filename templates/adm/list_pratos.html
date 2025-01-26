@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>Lista de Pratos</h1>
+    <a href="{{ url_for('criar_prato') }}">Adicionar Novo Prato</a>
     <ul>
         {% for prato in pratos %}
             <li>
@@ -30,6 +31,6 @@
             return confirm("Tem certeza de que deseja excluir este prato?");
         }
     </script>
-    <a href="{{ url_for('criar_prato') }}">Adicionar Novo Prato</a>
+    <a href="{{ url_for('admin_menu') }}">Voltar ao Menu Admin</a>
 </body>
 </html>
