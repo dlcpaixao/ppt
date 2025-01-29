@@ -61,7 +61,7 @@
                     <div>
                         <h5 class="fw-bold mb-1">{{ prato.nome }}</h5>
                         <p class="text-muted mb-1">{{ prato.descricao }}</p>
-                        <p class="fw-bold text-success mb-2">R$ {{ prato.preco }}</p>
+                        <p class="fw-bold text-success mb-2">R$ {{ "{:,.2f}".format(prato.preco).replace(".", ",") }}</p>
                         <form action="{{ url_for('adicionar_favorito') }}" method="POST">
                             <input type="hidden" name="prato_id" value="{{ prato.id }}">
                             <button type="submit" class="btn btn-warning btn-sm">Adicionar aos Favoritos</button>
@@ -88,7 +88,7 @@
                             <div>
                                 <h5 class="fw-bold mb-1">{{ bebida.nome }}</h5>
                                 <p class="text-muted mb-1">{{ bebida.descricao }}</p>
-                                <p class="fw-bold text-success mb-2">R$ {{ bebida.preco }}</p>
+                                <p class="fw-bold text-success mb-2">R$ {{ "{:,.2f}".format(bebida.preco).replace(".", ",") }}</p>
                                 <form action="{{ url_for('adicionar_favorito') }}" method="POST">
                                     <input type="hidden" name="bebida_id" value="{{ bebida.id }}">
                                     <button type="submit" class="btn btn-warning btn-sm">Adicionar aos Favoritos</button>
@@ -101,7 +101,15 @@
             </div>
         </section>
     </main>
-    <footer>
+    <footer class="mt-5 text-center">
+        <p>Nossos patrocinadores: 
+            <a href="https://instagram.com/espacorf_rosario" target="_blank">
+                <i class="fab fa-instagram"> </i>espacorf_rosario
+            </a> | 
+            <a href="https://instagram.com/patrocinador2" target="_blank">
+                <i class="fab fa-instagram"> </i>patrocinador2
+            </a>
+        </p>
         <p>&copy; 2025 Forno di Sogni. Todos os direitos reservados.</p>
     </footer>
 

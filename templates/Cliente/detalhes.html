@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-md-6">
                     <p><strong>Descrição:</strong> {{ item.descricao }}</p>
-                    <p><strong>Preço:</strong> R$ {{ item.preco }}</p>
+                    <p><strong>Preço:</strong> R$ {{ "{:,.2f}".format(item.preco).replace(".", ",") }}</p>
                     <a href="https://wa.me/559885623391{{ item.whatsapp }}" target="_blank" class="btn btn-success">
                         Comprar via WhatsApp
                     </a>
@@ -63,7 +63,15 @@
             </div>
         </section>
     </main>
-    <footer>
+    <footer class="mt-5 text-center">
+        <p>Nossos patrocinadores: 
+            <a href="https://instagram.com/espacorf_rosario" target="_blank">
+                <i class="fab fa-instagram"> </i>espacorf_rosario
+            </a> | 
+            <a href="https://instagram.com/patrocinador2" target="_blank">
+                <i class="fab fa-instagram"> </i>patrocinador2
+            </a>
+        </p>
         <p>&copy; 2025 Forno di Sogni. Todos os direitos reservados.</p>
     </footer>
 

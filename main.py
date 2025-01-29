@@ -360,9 +360,10 @@ def area_favoritos():
 
     # Obter favoritos do usuário, incluindo as informações de pratos e bebidas
     favoritos = Favorito.query.filter_by(cliente_id=current_user.id).all()
-
+    pratos = Prato.query.all()
+    bebidas = Bebida.query.all()
     # Renderizar o template com a lista de favoritos
-    return render_template('cliente/favoritos.html', favoritos=favoritos)
+    return render_template('cliente/favoritos.html', favoritos=favoritos, prato=pratos, bebida=bebidas)
 
 @app.route('/favoritos/<int:id>/delete', methods=['POST'])
 @login_required
