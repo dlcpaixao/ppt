@@ -55,7 +55,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background: url("/static/img/checkered-pattern5.png") repeat;
+    background: url("/static/img/checkered-pattern1.png") repeat;
     background-size: 200px 200px;
     background-size: cover; /* Ajusta ao tamanho da tela */
     background-attachment: fixed; /* Mantém o fundo fixo ao rolar */
