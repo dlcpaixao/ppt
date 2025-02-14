@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="">
+
+    <div class="min-h-screen text-white font-sans">
+        <div class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-12 gap-6 bg-gray-50">
+            <!-- Sidebar -->
+            <aside
+                class="md:col-span-3 sm:col-span-1 border-solid border-2 border-slate-950 bg-gray-100 rounded-lg p-6">
+                <!-- Profile -->
+                <div class="flex flex-col items-center">
+                    <!-- Foto de perfil com upload -->
+                    <div
+                        class="relative w-20 h-20 bg-teal-500 rounded-full flex items-center justify-center text-4xl font-bold overflow-hidden">
+                        <img id="profilePhoto" src="" alt="Foto de perfil" class="w-full h-full object-cover hidden">
+                        <span id="placeholder" class="text-white">L</span>
+                        <input type="file" id="photoInput" accept="image/*"
+                            class="absolute inset-0 opacity-0 cursor-pointer">
+                    </div>
+                    <h1 class="mt-4 text-xl font-semibold text-slate-950">Luis Diogo</h1>
+                    <p class="text-sm text-slate-950">luis999@gmail.com</p>
+                    <p class="text-sm mt-2 text-slate-950">989 85259605</p>
+                    <p class="text-sm text-slate-950">Aluno</p>
+                </div>
+
+                <!-- Bio -->
+                <div class="mt-6 border-t border-slate-950">
+                    <h2 class="text-sm font-semibold text-slate-950">Bio</h2>
+                    <button
+                        class="border-solid border-2 border-slate-950 mt-2 w-full bg-gray-0000 text-slate-950 hover:bg-gray-600 text-sm py-2 rounded">Edit</button>
+                </div>
+
+                <!-- Achievements -->
+                <div class="mt-6 border-t border-slate-950">
+                    <h2 class="text-sm font-semibold text-slate-950">Achievements</h2>
+                    <div class="mt-2 flex gap-3">
+                        <div class="w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center">
+                            <!-- Icon -->
+                        </div>
+                        <div class="w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center">
+                            <!-- Icon -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="mt-6 border-t border-slate-950">
+                    <h2 class="text-sm font-semibold text-slate-950">Product Updates</h2>
+                    <div class="flex gap-3 mt-2">
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-lg flex items-center justify-center">
+                            <!-- Twitter Icon -->
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-lg flex items-center justify-center">
+                            <!-- LinkedIn Icon -->
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-lg flex items-center justify-center">
+                            <!-- Copy Icon -->
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Upgrade Button -->
+                <div class="mt-6">
+                    <button
+                        class="border-solid border-2 border-slate-950 mt-2 w-full bg-gray-0000 text-slate-950 hover:bg-gray-600 text-sm py-2 rounded">
+                        Settings
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="md:col-span-9 sm:col-span-1">
+                <!-- Statistics -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="border-solid border-2 border-slate-950 rounded-lg p-4">
+                        <h2 class="text-sm font-semibold text-slate-950">Completions</h2>
+                        <p class="text-2xl font-bold text-red-500">72</p>
+                    </div>
+                    <div class="border-solid border-2 border-slate-950 rounded-lg p-4">
+                        <h2 class="text-sm font-semibold text-slate-950">Total Completions</h2>
+                        <p class="text-2xl font-bold text-blue-500">1,552</p>
+                    </div>
+                    <div class="border-solid border-2 border-slate-950 rounded-lg p-4">
+                        <h2 class="text-sm font-semibold text-slate-950">Streak (9 day record)</h2>
+                        <p class="text-2xl font-bold text-green-500">None</p>
+                    </div>
+                </div>
+                <h2 class="pt-10 font-semibold text-slate-950">1,552 accepted completions</h2>
+
+                <!-- Heatmap -->
+                <div class="rounded-lg p-6 mt-6 border-solid border-2 border-slate-950">
+                    <canvas id="heatmap" class="mt-4"></canvas>
+                </div>
+
+                <!-- Pie Chart -->
+                <div class="border-solid border-2 border-slate-950 rounded-lg p-6 mt-6">
+                    <canvas id="pieChart" class="max-w-[300px] mx-auto"></canvas>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Upload de foto
+        const photoInput = document.getElementById('photoInput');
+        const profilePhoto = document.getElementById('profilePhoto');
+        const placeholder = document.getElementById('placeholder');
+
+        photoInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    profilePhoto.src = e.target.result;
+                    profilePhoto.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Heatmap Placeholder (exemplo vazio)
+        const ctxHeatmap = document.getElementById('heatmap').getContext('2d');
+        new Chart(ctxHeatmap, {
+            type: 'line', // Apenas um exemplo
+            data: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                datasets: [{
+                    label: 'Sample Data',
+                    data: [10, 20, 30, 40, 50],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Permite ajustar melhor a proporção do gráfico
+            }
+        });
+
+        // Pie Chart
+        const ctxPie = document.getElementById('pieChart').getContext('2d');
+        new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ['Blade', 'PHP', 'Python', 'HTML', 'CSS', 'JavaScript'],
+                datasets: [{
+                    data: [40, 10, 20, 10, 10, 10],
+                    backgroundColor: ['#319795', '#D69E2E', '#4299E1', '#ED8936', '#ECC94B', '#38B2AC'],
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Permite o ajuste da proporção
+            }
+        });
+    </script>
+
+</body>
+
+</html>
