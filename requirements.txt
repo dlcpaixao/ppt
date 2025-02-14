@@ -1,0 +1,12 @@
+Django
+mysqlclient  # Se estiver usando MySQL
+psycopg2  # Se estiver usando PostgreSQL
+sqlite3  # Se estiver usando SQLite (não precisa instalar separadamente)
+django-crispy-forms
+cryptography
+requests
+pillow
+python-dotenv
+gunicorn
+django-environ
+whitenoise
